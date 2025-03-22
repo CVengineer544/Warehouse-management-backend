@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.shopping.demos.web.mapper.EnterpriseMapper">
+
+    <select id="findAll" resultType="com.example.shopping.demos.web.entity.Enterprise">
+        SELECT * FROM xmut_enterprise_info
+    </select>
+
+</mapper>

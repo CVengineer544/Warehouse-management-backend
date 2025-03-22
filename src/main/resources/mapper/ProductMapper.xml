@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.shopping.demos.web.mapper.ProductMapper">
+
+    <!-- 查询所有货品 -->
+    <select id="findAll" resultType="com.example.shopping.demos.web.entity.Product">
+        SELECT * FROM xmut_product
+    </select>
+
+    <!-- 插入新货品 -->
+    <insert id="insert" parameterType="com.example.shopping.demos.web.entity.Product">
+        INSERT INTO xmut_product(name, price, image, stock, category, warehouse_id, current_warehouse_id)
+        VALUES(#{name}, #{price}, #{image}, #{stock}, #{category}, #{warehouse.id}, #{currentWarehouseId})
+    </insert>
+
+    <!-- 删除货品 -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM xmut_product WHERE id = #{id}
+    </delete>
+
+    <!-- 根据 ID 查询货品 -->
+    <select id="findById" parameterType="int" resultType="com.example.shopping.demos.web.entity.Product">
+        SELECT * FROM xmut_product WHERE id = #{id}
+    </select>
+
+    <!-- 更新货品信息 -->
+    <update id="update" parameterType="com.example.shopping.demos.web.entity.Product">
+        UPDATE xmut_product
+        SET
+        name = #{name},
+        price = #{price},
+        stock = #{stock},
+        current_warehouse_id = #{currentWarehouseId},
+        warehouse_id = #{warehouse.id} <!-- 这里更新 warehouse 的 ID -->
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据当前仓库 ID 查询仓库名称 -->
+    <select id="findWarehouseNameByCurrentWarehouseId" parameterType="int" resultType="String">
+        SELECT w.name FROM xmut_warehouse w WHERE w.id = #{currentWarehouseId}
+    </select>
+    <select id="getWarehouseNameByProductId" resultType="String">
+        SELECT w.name FROM xmut_warehouse w
+                               JOIN xmut_product p ON w.id = p.warehouse_id
+        WHERE p.id = #{productId};
+    </select>
+</mapper>

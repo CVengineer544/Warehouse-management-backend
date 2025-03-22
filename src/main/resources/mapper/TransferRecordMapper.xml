@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.shopping.demos.web.mapper.TransferRecordMapper">
+
+    <insert id="insert" parameterType="com.example.shopping.demos.web.entity.TransferRecord">
+        INSERT INTO xmut_transfer_record (product_id, from_warehouse_id, to_warehouse_id, operator, transfer_time, quantity)
+        VALUES (#{productId}, #{fromWarehouseId}, #{toWarehouseId}, #{operator}, #{transferTime}, #{quantity})
+    </insert>
+
+    <select id="findAll" resultType="com.example.shopping.demos.web.entity.TransferRecord">
+        SELECT * FROM xmut_transfer_record
+    </select>
+
+    <delete id="deleteByProductId" parameterType="int">
+        DELETE FROM xmut_transfer_record WHERE product_id = #{productId}
+    </delete>
+
+    <delete id="deleteByWarehouseId" parameterType="long">
+        DELETE FROM xmut_transfer_record WHERE from_warehouse_id = #{warehouseId} OR to_warehouse_id = #{warehouseId}
+    </delete>
+
+</mapper>

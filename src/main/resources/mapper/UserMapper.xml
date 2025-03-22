@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.shopping.demos.web.mapper.UserMapper">
+
+    <!-- 根据用户名和密码查找用户 -->
+    <select id="findByUsernameAndPassword" resultType="com.example.shopping.demos.web.entity.User">
+        SELECT * FROM xmut_users
+        WHERE username = #{username} AND password = #{password}
+    </select>
+
+    <!-- 根据 useful 字段查找用户 -->
+    <select id="findUsersByUseful" parameterType="int" resultType="com.example.shopping.demos.web.entity.User">
+        SELECT * FROM xmut_users
+        WHERE useful = #{useful}
+    </select>
+
+    <!-- 更新用户的 useful 字段 -->
+    <update id="updateUserUseful">
+        UPDATE xmut_users
+        SET useful = #{useful}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 查找所有用户 -->
+    <select id="findAllUsers" resultType="com.example.shopping.demos.web.entity.User">
+        SELECT * FROM xmut_users
+    </select>
+
+    <!-- 更新用户密码 -->
+    <update id="updatePassword">
+        UPDATE xmut_users
+        SET password = #{newPassword}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除用户 -->
+    <delete id="deleteUser">
+        DELETE FROM xmut_users
+        WHERE id = #{id}
+    </delete>
+
+    <insert id="addUser" parameterType="com.example.shopping.demos.web.entity.User">
+        INSERT INTO xmut_users (id, account, username, password, sex, type, useful)
+        VALUES (#{id}, #{account}, #{username}, #{password}, #{sex}, #{type}, 1) <!-- 默认设置为启用 -->
+    </insert>
+    <update id="updateUserType">
+        UPDATE xmut_users
+        SET type = #{newType}
+        WHERE id = #{id}
+    </update>
+    <select id="findById" parameterType="long" resultType="com.example.shopping.demos.web.entity.User">
+        SELECT * FROM xmut_users
+        WHERE id = #{id}
+    </select>
+    <!-- 更新用户信息 -->
+    <update id="updateUser" parameterType="com.example.shopping.demos.web.entity.User">
+        UPDATE xmut_users
+        SET account = #{account}, username = #{username}, password = #{password}, sex = #{sex}
+        WHERE id = #{id}
+    </update>
+</mapper>

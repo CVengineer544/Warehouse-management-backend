@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.shopping.demos.web.mapper.WarehouseMapper">
+
+    <!-- 查询所有仓库 -->
+    <select id="findAll" resultType="com.example.shopping.demos.web.entity.Warehouse">
+        SELECT * FROM xmut_warehouse
+    </select>
+
+    <!-- 插入新仓库 -->
+    <insert id="insert" parameterType="com.example.shopping.demos.web.entity.Warehouse">
+        INSERT INTO xmut_warehouse (name) VALUES (#{name})
+    </insert>
+
+    <!-- 删除仓库 -->
+    <delete id="delete" parameterType="long">
+        DELETE FROM xmut_warehouse WHERE id = #{id}
+    </delete>
+
+    <!-- 根据仓库名称查询仓库 -->
+    <select id="findByName" parameterType="String" resultType="com.example.shopping.demos.web.entity.Warehouse">
+        SELECT * FROM xmut_warehouse WHERE name = #{name}
+    </select>
+
+    <!-- 根据 ID 查询仓库 -->
+    <select id="findById" parameterType="long" resultType="com.example.shopping.demos.web.entity.Warehouse">
+        SELECT * FROM xmut_warehouse WHERE id = #{id}
+    </select>
+
+</mapper>
